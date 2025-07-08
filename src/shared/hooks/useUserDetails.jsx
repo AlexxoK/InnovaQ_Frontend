@@ -2,7 +2,7 @@ import { useState } from "react"
 import { logout as logoutHandler } from "./useLogout.jsx"
 
 const getUserDetails = () => {
-    const userDetails = localStorage.getItem("usuario")
+    const userDetails = localStorage.getItem("user")
     if (userDetails) {
         return JSON.parse(userDetails)
     } else {

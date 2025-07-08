@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const PrivateRoutes = ({ children, roles }) => {
-    const user = JSON.parse(localStorage.getItem('usuario'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (!user) {
         return <Navigate to="/" />;

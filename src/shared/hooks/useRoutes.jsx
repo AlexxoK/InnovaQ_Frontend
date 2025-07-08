@@ -1,24 +1,20 @@
 import { useRoutes } from "react-router-dom";
 import PrivateRoutes from "../../components/PrivateRoutes";
+import Login from "../../components/Auth/Login.jsx"
+import Dashboard from "../../components/Dashboard/Dashboard.jsx";
 
-export const AppRoutes = () => {
+ const AppRoutes = () => {
     const routes = useRoutes([
         { path: "/", element: <Login /> },
-        { path: "/register", element: <Register /> },
         {
             path: "/dashboard", element: (
                 <PrivateRoutes>
                     <Dashboard />
                 </PrivateRoutes>
             )
-        },
-        {
-            path: "/listar-productos", element: (
-                <PrivateRoutes>
-                    <ListarProductos />
-                </PrivateRoutes>
-            )
-        },
+        }
     ])
     return routes;
 }
+
+export default AppRoutes;
