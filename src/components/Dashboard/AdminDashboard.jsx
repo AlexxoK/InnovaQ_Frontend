@@ -1,22 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../Layout/Navbar";
 import Sidebar from "../Layout/Sidebar";
 import { Car, Users, Clock, PieChart, Settings, AlertCircle, DollarSign, Calendar, Star, Activity, Shield, FileText } from 'lucide-react';
 import './admin.css'
+import { useAdminDashbordHook } from "../../shared/hooks/useAdminDashboard";
 
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes } = useAdminDashbordHook();
+    const [isLoading, setIsLoading] = useState(true);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await handleListMasVendidos();
+            await handleListUsuario();
+            await handlePromedio();
+            await handleNumeroClientes();
+            setIsLoading(false)
+        };
+        fetchData();
+    }, [])
+
     // Datos de ejemplo
     const stats = [
         { title: "Lavados hoy", value: "24", icon: <Car className="h-6 w-6" />, trend: "↑ 12%", color: "bg-blue-100 text-blue-600" },
-        { title: "Clientes nuevos", value: "8", icon: <Users className="h-6 w-6" />, trend: "↑ 5%", color: "bg-green-100 text-green-600" },
+        { title: "Clientes nuevos", value: `${numeroClientesAll}`, icon: <Users className="h-6 w-6" />, trend: "↑ 5%", color: "bg-green-100 text-green-600" },
         { title: "Ingresos diarios", value: "$1,245", icon: <DollarSign className="h-6 w-6" />, trend: "↑ 18%", color: "bg-purple-100 text-purple-600" },
-        { title: "Calificación", value: "4.8/5", icon: <Star className="h-6 w-6" />, trend: "↑ 0.2", color: "bg-yellow-100 text-yellow-600" }
+        { title: "Calificación", value: `${promedio}/5`, icon: <Star className="h-6 w-6" />, trend: "", color: "bg-yellow-100 text-yellow-600" }
     ];
 
     const recentOrders = [
@@ -26,11 +40,6 @@ const AdminDashboard = () => {
         { id: 4, client: "Ana Martínez", service: "Lavado Básico", time: "12:30 PM", status: "Pendiente", price: "$20.00" }
     ];
 
-    const employees = [
-        { name: "Luis Rodríguez", role: "Lavador", status: "Activo", schedule: "8AM - 4PM" },
-        { name: "Pedro Gómez", role: "Detallador", status: "Activo", schedule: "10AM - 6PM" },
-        { name: "Sofía Ramírez", role: "Cajero", status: "Descanso", schedule: "9AM - 5PM" }
-    ];
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -43,7 +52,7 @@ const AdminDashboard = () => {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                         <div>
                             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Panel de Administración</h1>
-                            <p className="text-gray-600">Resumen y métricas de tu carwash</p>
+                            <p className="text-gray-600">Resumen de ventas de productos para Carwash</p>
                         </div>
                         <div className="flex gap-3 mt-4 md:mt-0">
                             <button className="px-4 py-2 bg-white border border-gray-200 hover:border-gray-300 text-gray-700 rounded-lg transition-all flex items-center gap-2">
@@ -84,7 +93,7 @@ const AdminDashboard = () => {
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
                                         <Activity className="h-5 w-5 text-blue-600" />
-                                        Órdenes recientes
+                                        Pedidos Recientes
                                     </h2>
                                     <button className="text-sm text-blue-600 hover:text-blue-800 transition-colors">
                                         Ver todas
@@ -142,24 +151,23 @@ const AdminDashboard = () => {
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                                     <Users className="h-5 w-5 text-blue-600" />
-                                    Personal activo
+                                    Ultimos Clientes Registrados
                                 </h2>
                                 <div className="space-y-4">
-                                    {employees.map((employee, index) => (
+                                    {listUser.map((userlist, index) => (
                                         <div key={index} className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                            <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium">
-                                                {employee.name.charAt(0)}
+                                            <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-medium">
+                                                {userlist.nombre?.charAt(0)?.toUpperCase() || 'U'}
                                             </div>
                                             <div className="flex-1">
-                                                <h4 className="font-medium">{employee.name}</h4>
-                                                <p className="text-sm text-gray-500">{employee.role}</p>
+                                                <h4 className="font-medium">{userlist.nombre} {userlist.apellido}</h4>
+                                                <p className="text-sm text-gray-500">{userlist.role}</p>
                                             </div>
                                             <div className="text-right">
-                                                <span className={`text-xs px-2 py-1 rounded-full ${employee.status === 'Activo' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                                                    }`}>
-                                                    {employee.status}
+                                                <span className={`text-xs px-2 py-1 rounded-full ${userlist.estado ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                                                    {userlist.estado ? 'Activo' : 'Desactivado'}
                                                 </span>
-                                                <p className="text-xs text-gray-500 mt-1">{employee.schedule}</p>
+                                                <p className="text-xs text-gray-500 mt-1">{userlist.correo}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -175,43 +183,24 @@ const AdminDashboard = () => {
                                     <AlertCircle className="h-5 w-5 text-blue-600" />
                                     Alertas importantes
                                 </h2>
-                                <div className="space-y-3">
-                                    <div className="p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
-                                        <p className="text-sm font-medium text-red-800">Producto en bajo stock: Shampoo</p>
-                                        <p className="text-xs text-red-600">Solo quedan 3 unidades</p>
+                                {productosMasVendidosList.map((masVendidos) => (
+                                    <div key={masVendidos._id} className="group border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition duration-200 hover:shadow-md">
+                                        <div className="space-y-3">
+                                            <div className="p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                                <p className="text-sm font-medium text-red-800">
+                                                    Producto más vendido: {masVendidos.nombre}
+                                                </p>
+                                                <p className="text-xs text-red-600">
+                                                    Solo quedan {masVendidos.stock} unidades
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
-                                        <p className="text-sm font-medium text-yellow-800">Mantenimiento programado</p>
-                                        <p className="text-xs text-yellow-600">Maquina de presión - 15 Oct</p>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
 
                             {/* Quick Actions */}
-                            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                                <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                                    <Shield className="h-5 w-5 text-blue-600" />
-                                    Acciones rápidas
-                                </h2>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <button className="p-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-all flex flex-col items-center">
-                                        <Users className="h-5 w-5 mb-1" />
-                                        <span className="text-xs text-center">Agregar empleado</span>
-                                    </button>
-                                    <button className="p-3 bg-green-50 hover:bg-green-100 text-green-600 rounded-lg transition-all flex flex-col items-center">
-                                        <Car className="h-5 w-5 mb-1" />
-                                        <span className="text-xs text-center">Nuevo servicio</span>
-                                    </button>
-                                    <button className="p-3 bg-purple-50 hover:bg-purple-100 text-purple-600 rounded-lg transition-all flex flex-col items-center">
-                                        <DollarSign className="h-5 w-5 mb-1" />
-                                        <span className="text-xs text-center">Registrar pago</span>
-                                    </button>
-                                    <button className="p-3 bg-orange-50 hover:bg-orange-100 text-orange-600 rounded-lg transition-all flex flex-col items-center">
-                                        <Calendar className="h-5 w-5 mb-1" />
-                                        <span className="text-xs text-center">Programar</span>
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>

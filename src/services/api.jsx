@@ -32,6 +32,14 @@ export const login = async (data) => {
     return await apiClient.post('auth/login', data)
 }
 
+export const getListUser = async () => {
+    return await apiClient.get('usuarios/getUsuarios')
+}
+
+export const numeroClientes = async () => {
+    return await apiClient.get('usuarios/numeroClientes')
+}
+
 export const addProductos = async (data) => {
     return await apiClient.post('productos/agregar', data)
 }
@@ -46,4 +54,12 @@ export const editProductos = async (id) => {
 
 export const deleteProductos = async (id) => {
     return await apiClient.delete(`productos/eliminar/${id}`)
+}
+
+export const productosMasVendidos = async () => {
+    return await apiClient.get('productos/mas-vendidos')
+}
+
+export const promedioCalificacion = async () => {
+    return await apiClient.get('calificacion/promedio')
 }
