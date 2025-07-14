@@ -1,0 +1,111 @@
+.register-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, black, #4c5fd7);
+    padding: 20px;
+}
+
+.register-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+}
+
+.register-title {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    transition: color 0.3s;
+}
+
+.input-icon.focused {
+    color: gray;
+}
+
+.register-input {
+    width: 100%;
+    padding: 12px 40px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.register-input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #63b3ed;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+.register-button {
+    padding: 12px;
+    background: linear-gradient(135deg, #63b3ed, #4299e1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.register-button:hover {
+    background: linear-gradient(135deg, #4299e1, #63b3ed);
+}
+
+/* Estilo para el texto del link al login */
+.login-link-container {
+    margin-top: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.login-link-container a {
+    color: #63b3ed;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login-link-container a:hover {
+    color: #4299e1;
+}

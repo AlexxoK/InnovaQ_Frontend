@@ -1,6 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import PrivateRoutes from "../../components/PrivateRoutes";
 import Login from "../../components/Auth/Login.jsx"
+import Register from "../../components/Auth/Register.jsx"
 import Dashboard from "../../components/Dashboard/Dashboard.jsx";
 import CalificacionCliente from "../../components/Calificaciones/CalificacionCliente.jsx";
 import CalificacionAdmin from "../../components/Calificaciones/ClasificacionAdmin.jsx";
@@ -9,6 +10,9 @@ import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
  const AppRoutes = () => {
     const routes = useRoutes([
         { path: "/", element: <Login /> },
+
+        { path: "/register", element: <Register /> },
+
         {
             path: "/dashboard", element: (
                 <PrivateRoutes>
