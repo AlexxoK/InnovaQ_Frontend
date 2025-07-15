@@ -1,0 +1,210 @@
+.categorias-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, black, #4c5fd7);
+}
+
+.categorias-card {
+  background: linear-gradient(135deg, black, #4c5fd7);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.categorias-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.categorias-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.categorias-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.categorias-input,
+.categorias-textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categorias-input::placeholder,
+.categorias-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.categorias-input:focus,
+.categorias-textarea:focus {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 8px 2px lightgrey;
+}
+
+.categorias-button {
+  padding: 12px;
+  background: linear-gradient(135deg, lightslategray, black);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.categorias-button:hover {
+  background: linear-gradient(135deg, green, black);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 128, 0, 0.7);
+}
+
+.categorias-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categorias-list li {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.categorias-list li:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.categoria-contenido {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+}
+
+.categoria-nombre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.categoria-icono {
+  flex-shrink: 0;
+  color: white;
+}
+
+.categoria-descripcion {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.botones-container {
+  display: flex;
+  gap: 10px;
+}
+
+.categorias-editar-btn,
+.categorias-eliminar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.categorias-editar-btn {
+  background: lightslategray;
+  color: white;
+  box-shadow: 0 2px 8px rgba(119, 136, 153, 0.6);
+}
+
+.categorias-editar-btn:hover {
+  background: #5a7184;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(90, 113, 132, 0.8);
+}
+
+.categorias-eliminar-btn {
+  background: #e53e3e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(229, 62, 62, 0.6);
+}
+
+.categorias-eliminar-btn:hover {
+  background: #c53030;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(197, 48, 48, 0.8);
+}
+
+.cancelar-btn {
+  background: #e53e3e;
+  font-weight: 700;
+}
+
+.cancelar-btn:hover {
+  background: #c53030;
+}
+
+.boton-icono {
+  vertical-align: middle;
+  color: inherit;
+}
+
+@media (max-width: 640px) {
+  .categorias-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .categoria-contenido {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+  .botones-container {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}

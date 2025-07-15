@@ -7,7 +7,10 @@ import CalificacionCliente from "../../components/Calificaciones/CalificacionCli
 import CalificacionAdmin from "../../components/Calificaciones/ClasificacionAdmin.jsx";
 import ProductsAdmin from "../../components/Products/ProductsAdmin.jsx";
 import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
- const AppRoutes = () => {
+import CategoriaAdmin from "../../components/Categorias/CategoriaAdmin.jsx";
+import CategoriaCliente from "../../components/Categorias/CategoriaAdmin.jsx";
+
+const AppRoutes = () => {
     const routes = useRoutes([
         { path: "/", element: <Login /> },
 
@@ -45,6 +48,20 @@ import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
             path: "/AdminProductos", element: (
                 <PrivateRoutes roles={['ADMIN']}>
                     <ProductsAdmin />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/CategoriaAdmin", element: (
+                <PrivateRoutes roles={['ADMIN']}>
+                    <CategoriaAdmin />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/CategoriaCliente", element: (
+                <PrivateRoutes roles={['CLIENTE']}>
+                    <CategoriaCliente />
                 </PrivateRoutes>
             )
         }

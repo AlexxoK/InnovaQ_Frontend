@@ -11,40 +11,33 @@ const Layout = ({ children }) => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-            {/* Navbar */}
             <Navbar toggleSidebar={toggleSidebar} />
-            
-            {/* Sidebar */}
+
             <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-            
-            {/* Main Content */}
+
             <main className={`
-                pt-20 px-4 md:px-6 lg:px-8 
+                pt-18
                 transition-all duration-300 ease-in-out
                 ${sidebarOpen ? 'ml-0 md:ml-64' : 'ml-0'}
                 min-h-[calc(100vh-5rem)]
             `}>
-                {/* Container with nice shadow and animation */}
                 <div className="
                     bg-white rounded-xl shadow-sm
-                    border border-gray-200
+                    border-gray-200
                     min-h-[calc(100vh-6rem)]
-                    p-4 md:p-6
                     transition-all duration-200
                     hover:shadow-md
                     hover:border-gray-300
                 ">
                     {children}
                 </div>
-                
-                {/* Subtle decorative elements */}
+
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full -z-10 blur-3xl"></div>
                 <div className="absolute top-1/4 left-0 w-48 h-48 bg-purple-400/10 rounded-full -z-10 blur-3xl"></div>
             </main>
-            
-            {/* Floating Action Button for mobile */}
+
             {!sidebarOpen && (
-                <button 
+                <button
                     onClick={toggleSidebar}
                     className="
                         fixed bottom-6 left-6 z-30
@@ -65,7 +58,7 @@ const Layout = ({ children }) => {
                 </button>
             )}
         </div>
-    );
-};
+    )
+}
 
 export default Layout;

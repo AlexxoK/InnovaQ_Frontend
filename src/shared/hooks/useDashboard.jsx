@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
 export const ProductsAdminNavigate = () => {
     const [productsDashboard, setProductsDashboard] = useState([]);
     const navigate = useNavigate();
@@ -25,12 +23,12 @@ export const ProductsNavigate = () => {
     const handleProductsNavigate = async () => {
         try {
             console.log("Lista");
-            navigate("/ClientProductos", {state: {message: "Welcome List Products"}})
+            navigate("/ClientProductos", { state: { message: "Welcome List Products" } })
         } catch (error) {
             console.log(error)
         }
     }
-    return {productsNav, handleProductsNavigate};
+    return { productsNav, handleProductsNavigate };
 }
 
 export const CalificacionesNavigate = () => {
@@ -40,13 +38,13 @@ export const CalificacionesNavigate = () => {
     const handleCalificacionesNavigate = async () => {
         try {
             console.log("Lista");
-            navigate("/ClientCalificaciones", {state: {message: "Welcome List Calificaciones"}})
+            navigate("/ClientCalificaciones", { state: { message: "Welcome List Calificaciones" } })
         } catch (error) {
             console.log(error)
         }
     }
 
-    return {calificacionesNav, handleCalificacionesNavigate};
+    return { calificacionesNav, handleCalificacionesNavigate };
 }
 
 export const CalificacionesAdminNavigate = () => {
@@ -56,10 +54,25 @@ export const CalificacionesAdminNavigate = () => {
     const handleCalificacionesDashboard = async () => {
         try {
             console.log("Calificaciones");
-            navigate("/AdminCalificaciones", {state: {message: "Welcome Calificaciones Admin"}})
+            navigate("/AdminCalificaciones", { state: { message: "Welcome Calificaciones Admin" } })
         } catch (error) {
             console.log(error)
         }
     }
-    return {calificacionesDashboard, handleCalificacionesDashboard};
+    return { calificacionesDashboard, handleCalificacionesDashboard };
+}
+
+export const CategoriaAdminNavigate = () => {
+    const [categoriaDashboard, setCategoriaDashboard] = useState([])
+    const navigate = useNavigate();
+
+    const handleCategoriaDashboard = async () => {
+        try {
+            console.log("Categorias");
+            navigate("/CategoriaAdmin", { state: { message: "Welcome to Categorias Admin" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { categoriaDashboard, handleCategoriaDashboard };
 }

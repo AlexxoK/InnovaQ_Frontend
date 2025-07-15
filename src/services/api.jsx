@@ -6,15 +6,14 @@ const apiClient = axios.create({
     timeout: 10000,
 })
 
-
 apiClient.interceptors.request.use(
     (config) => {
         const storedUser = localStorage.getItem('user')
 
         if (storedUser) {
             try {
-                const {token} = JSON.parse(storedUser)
-                if(token) {
+                const { token } = JSON.parse(storedUser)
+                if (token) {
                     config.headers["x-token"] = token;
                 }
             } catch (error) {
@@ -66,4 +65,24 @@ export const productosMasVendidos = async () => {
 
 export const promedioCalificacion = async () => {
     return await apiClient.get('calificacion/promedio')
+}
+
+export const postCategoria = async (data) => {
+    return await apiClient.post('categorias/postCategoria', data)
+}
+
+export const getCategorias = async () => {
+    return await apiClient.get('categorias/getCategorias')
+}
+
+export const getCategoriasPorNombre = async (nombre) => {
+    return await apiClient.get(`categorias/getCategorias/${nombre}`)
+}
+
+export const putCategoria = async (id, data) => {
+    return await apiClient.put(`categorias/putCategoria/${id}`, data)
+}
+
+export const deleteCategoria = async (id) => {
+    return await apiClient.delete(`categorias/deleteCategoria/${id}`)
 }

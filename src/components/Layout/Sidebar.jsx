@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
-    FileBox, ChevronLeft,Box, Star, ListStart
+  FileBox, ChevronLeft, Box, Star, ListStart, Layers
 } from 'lucide-react';
 import './sidebar.css'
 
@@ -9,29 +9,32 @@ import { ProductsAdminNavigate } from "../../shared/hooks/useDashboard";
 import { ProductsNavigate } from "../../shared/hooks/useDashboard";
 import { CalificacionesNavigate } from "../../shared/hooks/useDashboard";
 import { CalificacionesAdminNavigate } from "../../shared/hooks/useDashboard";
+import { CategoriaAdminNavigate } from "../../shared/hooks/useDashboard";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-    const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('user'));
-    const { productsDashboard, handleProductsDashboard } = ProductsAdminNavigate();
-    const { productsNav, handleProductsNavigate } = ProductsNavigate();
-    const { calificacionesNav, handleCalificacionesNavigate } = CalificacionesNavigate();
-    const { calificacionesDashboard, handleCalificacionesDashboard } = CalificacionesAdminNavigate();
+  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { productsDashboard, handleProductsDashboard } = ProductsAdminNavigate();
+  const { productsNav, handleProductsNavigate } = ProductsNavigate();
+  const { calificacionesNav, handleCalificacionesNavigate } = CalificacionesNavigate();
+  const { calificacionesDashboard, handleCalificacionesDashboard } = CalificacionesAdminNavigate();
+  const { categoriaDashboard, handleCategoriaDashboard } = CategoriaAdminNavigate();
 
-    const clientSections = [
-        { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate  },
-        { text: 'Calificaciones', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate  }
-    ];
+  const clientSections = [
+    { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate },
+    { text: 'Calificaciones', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate }
+  ];
 
 
-    const adminSections = [
-        { text: 'Productos', icon: <FileBox className="h-5 w-5" />, action: handleProductsDashboard  },
-        { text: 'Calificaciones', icon: <ListStart className="h-5 w-5" />, action: handleCalificacionesDashboard  }
-    ]
+  const adminSections = [
+    { text: 'Productos', icon: <FileBox className="h-5 w-5" />, action: handleProductsDashboard },
+    { text: 'Calificaciones', icon: <ListStart className="h-5 w-5" />, action: handleCalificacionesDashboard },
+    { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboard }
+  ]
 
-     const sections = user?.role === 'ADMIN' ? adminSections : clientSections;
+  const sections = user?.role === 'ADMIN' ? adminSections : clientSections;
 
-    return (
+  return (
     <div className={`fixed inset-y-0 left-0 z-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white w-64 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-all duration-300 ease-in-out shadow-2xl flex flex-col`}>
       <div className="flex items-center justify-between p-4 border-b border-gray-700 bg-gray-900">
         <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
