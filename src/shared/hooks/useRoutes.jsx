@@ -8,7 +8,7 @@ import CalificacionAdmin from "../../components/Calificaciones/ClasificacionAdmi
 import ProductsAdmin from "../../components/Products/ProductsAdmin.jsx";
 import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
 import CategoriaAdmin from "../../components/Categorias/CategoriaAdmin.jsx";
-import CategoriaCliente from "../../components/Categorias/CategoriaAdmin.jsx";
+import CategoriaCliente from "../../components/Categorias/CategoriaCliente.jsx";
 
 const AppRoutes = () => {
     const routes = useRoutes([

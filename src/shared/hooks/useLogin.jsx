@@ -70,8 +70,8 @@ export const useLogin = () => {
 
             await showAlert(
                 'success',
-                'Inicio de sesión exitoso',
-                'Bienvenido a Banco Innova!',
+                'Inicio de sesión exitoso!',
+                'Bienvenido a InnovaQ!',
                 3000
             );
 

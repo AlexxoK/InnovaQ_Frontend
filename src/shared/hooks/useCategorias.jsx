@@ -72,9 +72,9 @@ export const useCategorias = () => {
         setLoading(true);
         try {
             const response = await getCategoriasPorNombre(nombre);
-            return response.data?.categoria || null;
+            setCategorias(response.data?.categorias || []);
         } catch (error) {
-            return null;
+            showErrorAlert(error);
         } finally {
             setLoading(false);
         }

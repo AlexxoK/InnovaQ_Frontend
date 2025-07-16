@@ -63,10 +63,10 @@ export const CalificacionesAdminNavigate = () => {
 }
 
 export const CategoriaAdminNavigate = () => {
-    const [categoriaDashboard, setCategoriaDashboard] = useState([])
+    const [categoriaDashboardAdmin, setCategoriaDashboardAdmin] = useState([])
     const navigate = useNavigate();
 
-    const handleCategoriaDashboard = async () => {
+    const handleCategoriaDashboardAdmin = async () => {
         try {
             console.log("Categorias");
             navigate("/CategoriaAdmin", { state: { message: "Welcome to Categorias Admin" } })
@@ -74,5 +74,20 @@ export const CategoriaAdminNavigate = () => {
             console.log(error)
         }
     }
-    return { categoriaDashboard, handleCategoriaDashboard };
+    return { categoriaDashboardAdmin, handleCategoriaDashboardAdmin };
+}
+
+export const CategoriaClienteNavigate = () => {
+    const [categoriaDashboardCliente, setCategoriaDashboardCliente] = useState([])
+    const navigate = useNavigate();
+
+    const handleCategoriaDashboardCliente = async () => {
+        try {
+            console.log("Categorias");
+            navigate("/CategoriaCliente", { state: { message: "Welcome to Categorias Cliente" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { categoriaDashboardCliente, handleCategoriaDashboardCliente };
 }

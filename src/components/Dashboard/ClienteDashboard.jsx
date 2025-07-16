@@ -35,8 +35,8 @@ const ClienteDashboard = () => {
                     {/* Header */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Mi Panel de Cliente</h1>
-                            <p className="text-gray-600">Bienvenido a tu centro de control de lavados</p>
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Clientes</h1>
+                            <p className="text-gray-600">Bienvenido a nuestra página InnovaQ!</p>
                         </div>
                         <button className="mt-4 md:mt-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all flex items-center gap-2">
                             <Car className="h-5 w-5" />

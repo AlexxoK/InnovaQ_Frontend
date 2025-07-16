@@ -63,7 +63,7 @@ const Navbar = ({ toggleSidebar }) => {
               <Home className="h-5 w-5 text-white" />
             </div>
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
-              {user?.role === 'ADMIN' ? 'Admin Dashboard' : 'Mi Banco Digital'}
+              {user?.role === 'ADMIN' ? 'Innovaciones Químicas y Servicios Administración' : 'Innovaciones Químicas y Servicios'}
             </span>
           </a>
         </div>

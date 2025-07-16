@@ -51,8 +51,8 @@ const AdminDashboard = () => {
                     {/* Header */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Panel de Administración</h1>
-                            <p className="text-gray-600">Resumen de ventas de productos para Carwash</p>
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Administración</h1>
+                            <p className="text-gray-600">Sigan haciendo su mayor esfuerzo!</p>
                         </div>
                         <div className="flex gap-3 mt-4 md:mt-0">
                             <button className="px-4 py-2 bg-white border border-gray-200 hover:border-gray-300 text-gray-700 rounded-lg transition-all flex items-center gap-2">
