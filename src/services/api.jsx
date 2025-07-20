@@ -68,7 +68,6 @@ export const promedioCalificacion = async () => {
     return await apiClient.get('calificacion/promedio')
 }
 
-<<<<<<< HEAD
 export const postCategoria = async (data) => {
     return await apiClient.post('categorias/postCategoria', data)
 }
@@ -87,8 +86,4 @@ export const putCategoria = async (id, data) => {
 
 export const deleteCategoria = async (id) => {
     return await apiClient.delete(`categorias/deleteCategoria/${id}`)
-=======
-export const listaCategorias = async () => {
-    return await apiClient.get('categorias/getCategorias')
->>>>>>> f/castillo
 }
