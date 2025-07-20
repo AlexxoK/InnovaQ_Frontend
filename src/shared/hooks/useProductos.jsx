@@ -10,7 +10,7 @@ export const useProductsHook = () => {
         try {
             const response = await listProductos();
             console.log(response, "ListaProductos");
-            setListProducts(response.data.producto);
+            setListProducts(response.data.productos);
         } catch (error) {
             const backendError = error.response?.data;
             Swal.fire({
@@ -51,7 +51,7 @@ export const useProductsHook = () => {
         }
     }
 
-    const handleEditProductos = async (id) => {
+    const handleEditProductos = async (id, formData) => {
         const confirm = await Swal.fire({
             title: '¿Estás seguro?',
             text: "Esta seguro que deseas editar este producto?",
@@ -69,7 +69,11 @@ export const useProductsHook = () => {
         if (confirm.isConfirmed) {
             try {
                 setLoading(true);
-                const response = await editProductos(id);
+                const data = new FormData();
+                for (const key in formData) {
+                    data.append(key, formData[key]);
+                }
+                const response = await editProductos(id, formData);
                 console.log(response, "EditarProductos");
                 await Swal.fire({
                     title: 'Producto Editado',
@@ -93,7 +97,7 @@ export const useProductsHook = () => {
         }
     }
 
-    const handleDeleteCuenta = async (id) => {
+    const handleDeleteProductos = async (id) => {
         const confirm = await Swal.fire({
             title: '¿Está seguro?',
             text: 'Esta acción eliminará el producto permanentemente.',
@@ -139,7 +143,7 @@ export const useProductsHook = () => {
             }
         }
     };
-    return { listaProducts, handleGetListProducts, handleAddProductos, handleEditProductos, handleDeleteCuenta, loading };
+    return { listaProducts, handleGetListProducts, handleAddProductos, handleEditProductos, handleDeleteProductos, loading };
 }
 
 

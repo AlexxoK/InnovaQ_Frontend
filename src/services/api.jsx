@@ -4,6 +4,7 @@ import { useLogout } from '../shared/hooks/useLogout'
 const apiClient = axios.create({
     baseURL: 'http://localhost:3000/InnovaQ/v1',
     timeout: 10000,
+    
 })
 
 apiClient.interceptors.request.use(
@@ -51,8 +52,8 @@ export const listProductos = async () => {
     return await apiClient.get('productos/lista')
 }
 
-export const editProductos = async (id) => {
-    return await apiClient.put(`productos/actualizar/${id}`)
+export const editProductos = async (id, data) => {
+    return await apiClient.put(`productos/actualizar/${id}`, data)
 }
 
 export const deleteProductos = async (id) => {
@@ -67,6 +68,7 @@ export const promedioCalificacion = async () => {
     return await apiClient.get('calificacion/promedio')
 }
 
+<<<<<<< HEAD
 export const postCategoria = async (data) => {
     return await apiClient.post('categorias/postCategoria', data)
 }
@@ -85,4 +87,8 @@ export const putCategoria = async (id, data) => {
 
 export const deleteCategoria = async (id) => {
     return await apiClient.delete(`categorias/deleteCategoria/${id}`)
+=======
+export const listaCategorias = async () => {
+    return await apiClient.get('categorias/getCategorias')
+>>>>>>> f/castillo
 }
