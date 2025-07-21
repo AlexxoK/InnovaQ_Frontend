@@ -61,6 +61,7 @@ export const useCategorias = () => {
         try {
             const response = await getCategorias();
             setCategorias(response.data.categorias || []);
+            console.log(response, "ListaCategorias");
         } catch (error) {
             showErrorAlert(error);
         } finally {

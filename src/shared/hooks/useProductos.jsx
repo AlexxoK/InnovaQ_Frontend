@@ -33,6 +33,7 @@ export const useProductsHook = () => {
                 text: 'El producto ha sido agregado exitosamente',
                 icon: 'success',
                 timer: 1500,
+                color: 'white',
                 background: '#1f2937',
                 customClass: {
                     popup: 'animate__animated animate__fadeInDown',
@@ -61,6 +62,7 @@ export const useProductsHook = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, editar',
             cancelButtonText: 'Cancelar',
+            color: 'white',
             background: '#1f2937',
             customClass: {
                 popup: 'animate__animated animate__fadeInDown',
@@ -80,6 +82,7 @@ export const useProductsHook = () => {
                     text: 'El producto ha sido editado exitosamente',
                     icon: 'success',
                     timer: 1500,
+                    color: 'white',
                     background: '#1f2937',
                     customClass: {
                         popup: 'animate__animated animate__fadeInDown',
