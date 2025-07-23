@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useProductsHook } from "../../shared/hooks/useProductos";
 import { useCategorias } from "../../shared/hooks/useCategorias";
 import Layout from "../Layout/Layout.jsx";
-import { 
-  PlusCircle, 
-  Edit2, 
-  Trash2, 
-  X, 
-  Check, 
-  Image as ImageIcon,
-  Loader2,
-  ChevronDown
+import {
+    PlusCircle,
+    Edit2,
+    Trash2,
+    X,
+    Check,
+    Image as ImageIcon,
+    Loader2,
+    ChevronDown
 } from 'lucide-react';
 
 const ProductsAdmin = () => {
@@ -23,10 +23,10 @@ const ProductsAdmin = () => {
         loading
     } = useProductsHook();
 
-    const { 
-        handleGetCategorias, 
-        categorias, 
-        loading: loadingCategories 
+    const {
+        handleGetCategorias,
+        categorias,
+        loading: loadingCategories
     } = useCategorias();
 
     const [formData, setFormData] = useState({
@@ -72,14 +72,21 @@ const ProductsAdmin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
-        
+
         try {
             const data = new FormData();
-            for (const key in formData) {
-                if (key === "imagen" && formData.imagen) data.append("imagen", formData.imagen);
-                else if (key === "imagenUrl" && !formData.imagen && formData.imagenUrl)
-                    data.append("imagen", formData.imagenUrl);
-                else if (key !== "imagenUrl") data.append(key, formData[key]);
+
+            data.append("nombre", formData.nombre);
+            data.append("categoria", formData.categoria);
+            data.append("instrucciones", formData.instrucciones);
+            data.append("precio", formData.precio);
+            data.append("stock", formData.stock);
+
+            // Solo uno de estos dos debe ir
+            if (formData.imagen) {
+                data.append("imagen", formData.imagen);
+            } else if (formData.imagenUrl) {
+                data.append("imagen", formData.imagenUrl);
             }
 
             if (editId) {
@@ -98,14 +105,14 @@ const ProductsAdmin = () => {
     };
 
     const resetForm = () => {
-        setFormData({ 
-            nombre: "", 
-            categoria: "", 
-            instrucciones: "", 
-            precio: "", 
-            stock: "", 
-            imagen: null, 
-            imagenUrl: "" 
+        setFormData({
+            nombre: "",
+            categoria: "",
+            instrucciones: "",
+            precio: "",
+            stock: "",
+            imagen: null,
+            imagenUrl: ""
         });
         setPreview(null);
     };
@@ -151,7 +158,7 @@ const ProductsAdmin = () => {
                             </>
                         )}
                     </h3>
-                    
+
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
@@ -252,11 +259,11 @@ const ProductsAdmin = () => {
                                         <label className="flex-1 cursor-pointer bg-gradient-to-r from-indigo-100 to-purple-100 hover:from-indigo-200 hover:to-purple-200 text-indigo-700 py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center border border-indigo-200 shadow-sm hover:shadow-md">
                                             <ImageIcon className="mr-2 animate-pulse" size={16} />
                                             Subir imagen, Solo imagenes con formato .png, .webp, .jpg o .jpeg
-                                            <input 
-                                                type="file" 
-                                                className="hidden" 
-                                                accept="image/*" 
-                                                onChange={handleFileChange} 
+                                            <input
+                                                type="file"
+                                                className="hidden"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
                                             />
                                         </label>
                                         <span className="text-indigo-500 font-medium">o</span>
@@ -272,10 +279,10 @@ const ProductsAdmin = () => {
                                 {preview && (
                                     <div className="mb-4 transition-all duration-500 animate-fade-in">
                                         <p className="text-sm text-indigo-600 mb-1">Vista previa:</p>
-                                        <img 
-                                            src={preview} 
-                                            alt="preview" 
-                                            className="rounded-lg border-2 border-indigo-200 max-h-40 object-contain shadow-md transition-transform duration-300 hover:scale-105" 
+                                        <img
+                                            src={preview}
+                                            alt="preview"
+                                            className="rounded-lg border-2 border-indigo-200 max-h-40 object-contain shadow-md transition-transform duration-300 hover:scale-105"
                                         />
                                     </div>
                                 )}
@@ -316,7 +323,7 @@ const ProductsAdmin = () => {
                             Lista de productos
                         </span>
                     </h4>
-                    
+
                     {loading ? (
                         <div className="flex justify-center items-center py-12">
                             <Loader2 className="animate-spin text-indigo-600" size={32} />
@@ -324,22 +331,22 @@ const ProductsAdmin = () => {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {listaProducts.map((product, index) => (
-                                <div 
-                                    key={product._id} 
+                                <div
+                                    key={product._id}
                                     className={`border border-indigo-100 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2 bg-white animate-fade-in-up`}
                                     style={{ animationDelay: `${index * 50}ms` }}
                                 >
                                     <div className="h-48 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center overflow-hidden">
-                                        <img 
-                                            src={product.imagen} 
-                                            alt={product.nombre} 
+                                        <img
+                                            src={product.imagen}
+                                            alt={product.nombre}
                                             className="w-full h-full object-contain transition-transform duration-500 hover:scale-110"
                                         />
                                     </div>
                                     <div className="p-4">
                                         <h5 className="font-bold text-lg text-indigo-800 mb-2">{product.nombre}</h5>
                                         <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.instrucciones}</p>
-                                        
+
                                         <div className="grid grid-cols-2 gap-2 mb-4">
                                             <div className="bg-indigo-50 p-2 rounded-lg">
                                                 <p className="text-xs text-indigo-500">Precio</p>
@@ -354,16 +361,16 @@ const ProductsAdmin = () => {
                                                 <p className="font-medium text-indigo-700">{product.categoria?.nombre || 'Sin categoría'}</p>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="flex space-x-2">
-                                            <button 
+                                            <button
                                                 onClick={() => handleEditClick(product)}
                                                 className="flex-1 bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 py-2 px-3 rounded-lg flex items-center justify-center text-sm transition-all duration-300 shadow hover:shadow-md"
                                             >
                                                 <Edit2 className="mr-1 animate-pulse" size={16} />
                                                 Editar
                                             </button>
-                                            <button 
+                                            <button
                                                 onClick={() => handleDeleteProductos(product._id)}
                                                 className="flex-1 bg-gradient-to-r from-red-100 to-red-200 hover:from-red-200 hover:to-red-300 text-red-800 py-2 px-3 rounded-lg flex items-center justify-center text-sm transition-all duration-300 shadow hover:shadow-md"
                                             >
@@ -374,7 +381,7 @@ const ProductsAdmin = () => {
                                     </div>
                                 </div>
                             ))}
-                        </div>  
+                        </div>
                     )}
                 </div>
             </div>
