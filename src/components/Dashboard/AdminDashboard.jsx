@@ -7,7 +7,9 @@ import { useAdminDashbordHook } from "../../shared/hooks/useAdminDashboard";
 
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes } = useAdminDashbordHook();
+    const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes ,
+
+    } = useAdminDashbordHook();
     const [isLoading, setIsLoading] = useState(true);
 
     const toggleSidebar = () => {

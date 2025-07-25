@@ -68,5 +68,7 @@ export const useAdminDashbordHook = () => {
             })
         }
     }
+
+    
     return {productosMasVendidosList, handleListMasVendidos, listUser, handleListUsuario, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes}
 }

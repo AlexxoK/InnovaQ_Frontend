@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   const clientSections = [
     { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate },
-    { text: 'Calificaciones', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate },
+    { text: 'Califica Nuestra App', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate },
     { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardCliente }
   ];
 

@@ -87,3 +87,15 @@ export const putCategoria = async (id, data) => {
 export const deleteCategoria = async (id) => {
     return await apiClient.delete(`categorias/deleteCategoria/${id}`)
 }
+
+export const postCalificacion = async (data, id) => {
+    return await apiClient.post(`calificacion/${id}`, data)
+}
+
+export const getCalificacion  = async () => {
+    return await apiClient.get('calificacion/')
+}
+
+export const getCalificacionPromedio = async () => {
+    return await apiClient.get('calificacion/promedio')
+}
