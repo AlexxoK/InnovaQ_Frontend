@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Layout/Navbar";
 import Sidebar from "../Layout/Sidebar";
-import { Car, Users, Clock, PieChart, Settings, AlertCircle, DollarSign, Calendar, Star, Activity, Shield, FileText } from 'lucide-react';
+import { Car, Users, PieChart, Settings, AlertCircle, DollarSign, Star, Activity, FileText } from 'lucide-react';
+import {
+    UserIcon,
+    ShoppingBagIcon,
+    CalendarIcon,
+    CheckCircleIcon,
+    ClockIcon,
+    CurrencyDollarIcon
+} from '@heroicons/react/24/outline';
 import './admin.css'
 import { useAdminDashbordHook } from "../../shared/hooks/useAdminDashboard";
 
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes ,
-
+    const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes,
+        pedidosAdmin, handlePedidosAdmin
     } = useAdminDashbordHook();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -22,6 +30,7 @@ const AdminDashboard = () => {
             await handleListUsuario();
             await handlePromedio();
             await handleNumeroClientes();
+            await handlePedidosAdmin();
             setIsLoading(false)
         };
         fetchData();
@@ -29,17 +38,10 @@ const AdminDashboard = () => {
 
     // Datos de ejemplo
     const stats = [
-        { title: "Lavados hoy", value: "24", icon: <Car className="h-6 w-6" />, trend: "↑ 12%", color: "bg-blue-100 text-blue-600" },
+        { title: "Pedidos Realizados", value: `${pedidosAdmin.length}`, icon: <Car className="h-6 w-6" />, trend: "↑ 12%", color: "bg-blue-100 text-blue-600" },
         { title: "Clientes nuevos", value: `${numeroClientesAll}`, icon: <Users className="h-6 w-6" />, trend: "↑ 5%", color: "bg-green-100 text-green-600" },
         { title: "Ingresos diarios", value: "$1,245", icon: <DollarSign className="h-6 w-6" />, trend: "↑ 18%", color: "bg-purple-100 text-purple-600" },
         { title: "Calificación", value: `${promedio}/5`, icon: <Star className="h-6 w-6" />, trend: "", color: "bg-yellow-100 text-yellow-600" }
-    ];
-
-    const recentOrders = [
-        { id: 1, client: "Juan Pérez", service: "Lavado Premium", time: "10:30 AM", status: "En progreso", price: "$45.00" },
-        { id: 2, client: "María García", service: "Lavado Express", time: "11:15 AM", status: "Completado", price: "$25.00" },
-        { id: 3, client: "Carlos López", service: "Detallado Completo", time: "9:00 AM", status: "Completado", price: "$80.00" },
-        { id: 4, client: "Ana Martínez", service: "Lavado Básico", time: "12:30 PM", status: "Pendiente", price: "$20.00" }
     ];
 
 
@@ -106,28 +108,75 @@ const AdminDashboard = () => {
                                     <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
                                             <tr>
-                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Servicio</th>
-                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
-                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
+                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-black font-bold">Cliente</th>
+                                                <th className="px-4 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider text-black font-bold">Productos</th>
+                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-black font-bold">Fecha</th>
+                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider  text-black font-bold">Estado</th>
+                                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-black font-bold">Total</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {recentOrders.map(order => (
-                                                <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                                                    <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">{order.client}</td>
-                                                    <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{order.service}</td>
-                                                    <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{order.time}</td>
-                                                    <td className="px-4 py-3 whitespace-nowrap">
-                                                        <span className={`px-2 py-1 text-xs rounded-full ${order.status === 'Completado' ? 'bg-green-100 text-green-800' :
-                                                            order.status === 'En progreso' ? 'bg-blue-100 text-blue-800' :
-                                                                'bg-yellow-100 text-yellow-800'
-                                                            }`}>
-                                                            {order.status}
-                                                        </span>
+                                        <tbody className="divide-y divide-gray-200 bg-gray-50">
+                                            {pedidosAdmin.map(order => (
+                                                <tr key={order.id} className="hover:bg-gray-100 transition-colors duration-150 ease-in-out">
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <div className="flex items-center">
+                                                            <div className="flex-shrink-0 h-10 w-10 bg-violet-100 rounded-full flex items-center justify-center">
+                                                                <UserIcon className="h-5 w-5 text-violet-600" />
+                                                            </div>
+                                                            <div className="ml-4">
+                                                                <div className="text-sm font-medium text-violet-600">{order.user.nombre}</div>
+                                                            </div>
+                                                        </div>
                                                     </td>
-                                                    <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">{order.price}</td>
+
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <div className="text-sm text-gray-900 font-semibold space-y-1">
+                                                            {order.productos.map((p, i) => (
+                                                                <div key={i} className="flex items-center">
+                                                                    <ShoppingBagIcon className="flex-shrink-0 mr-2 h-4 w-4 text-blue-500" />
+                                                                    <span>{p.producto.nombre}</span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <div className="flex items-center">
+                                                            <CalendarIcon className="flex-shrink-0 mr-2 h-4 w-4 text-cyan-400" />
+                                                            <span className="text-sm font-medium text-cyan-600">
+                                                                {order.fechaPedido}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <div className="flex items-center">
+                                                            {order.estado ? (
+                                                                <>
+                                                                    <CheckCircleIcon className="flex-shrink-0 mr-2 h-4 w-4 text-emerald-500" />
+                                                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                                                                        Completado
+                                                                    </span>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <ClockIcon className="flex-shrink-0 mr-2 h-4 w-4 text-yellow-500" />
+                                                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                                        En progreso
+                                                                    </span>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </td>
+
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <div className="flex items-center">
+                                                            <CurrencyDollarIcon className="flex-shrink-0 mr-2 h-4 w-4 text-sky-500" />
+                                                            <span className="text-sm font-bold text-sky-700">
+                                                                {order.total}
+                                                            </span>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>

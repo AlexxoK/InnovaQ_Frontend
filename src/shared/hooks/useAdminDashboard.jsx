@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { productosMasVendidos, getListUser, promedioCalificacion, numeroClientes} from "../../services/api";
+import { productosMasVendidos, getListUser, promedioCalificacion, numeroClientes, getPedidos} from "../../services/api";
 
 
 export const useAdminDashbordHook = () => {
@@ -8,6 +8,7 @@ export const useAdminDashbordHook = () => {
     const [listUser, setListUser] = useState([])
     const [promedio, setPromedio] = useState([])
     const [numeroClientesAll, setNumeroClientesAll] = useState([])
+    const [pedidosAdmin, setPedidosAdmin] = useState([])
     const [loading, setLoading] = useState(false);
 
     const handleListMasVendidos = async () => {
@@ -69,6 +70,21 @@ export const useAdminDashbordHook = () => {
         }
     }
 
+    const handlePedidosAdmin = async () => {
+        try {
+            const response = await getPedidos();
+            console.log(response, "PedidosAdmin");
+            setPedidosAdmin(response.data.pedidos);
+        } catch (error) {
+            const backendError = error.response?.data;
+            Swal.fire({
+                title: 'Error',
+                text: backendError?.error || backendError?.msg || 'Error',
+                icon: 'error'
+            })
+        }
+    }
+
     
-    return {productosMasVendidosList, handleListMasVendidos, listUser, handleListUsuario, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes}
+    return {productosMasVendidosList, handleListMasVendidos, listUser, handleListUsuario, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes, pedidosAdmin, handlePedidosAdmin}
 }

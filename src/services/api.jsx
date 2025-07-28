@@ -99,3 +99,7 @@ export const getCalificacion  = async () => {
 export const getCalificacionPromedio = async () => {
     return await apiClient.get('calificacion/promedio')
 }
+
+export const getPedidos = async () => {
+    return await apiClient.get('pedidos/')
+}
