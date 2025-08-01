@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FileBox, ChevronLeft, Box, Star, ListStart, Layers, PackageIcon
+  FileBox, ChevronLeft, Box, Star, ListStart, Layers, PackageIcon,ReceiptText
 } from 'lucide-react';
 import './sidebar.css'
 
@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { calificacionesDashboard, handleCalificacionesDashboard } = CalificacionesAdminNavigate();
   const { categoriaDashboardAdmin, handleCategoriaDashboardAdmin } = CategoriaAdminNavigate();
   const { categoriaDashboardCliente, handleCategoriaDashboardCliente } = CategoriaClienteNavigate();
-  const { facturasDashboard, handleFacturasDashboard } = FacturasNavigate();
+  const { facturasNav, handleFacturasNavigate } = FacturasNavigate();
   const { PedidoDashboardCliente, handlePedidoDashboardCliente } = PedidoClienteNavigate();
   const { PedidoDashboardAdmin, handlePedidoDashboardAdmin } = PedidoAdminNavigate();
 
@@ -32,7 +32,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate },
     { text: 'Califica Nuestra App', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate },
     { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardCliente },
-    { text: 'Pedidos', icon: <PackageIcon className="h-5 w-5" />, action: handlePedidoDashboardCliente }
+    { text: 'Pedidos', icon: <PackageIcon className="h-5 w-5" />, action: handlePedidoDashboardCliente },
+    { text: 'Facturas', icon: <ReceiptText className="h-5 w-5" />, action: handleFacturasNavigate }
+
   ];
 
 
@@ -40,7 +42,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { text: 'Productos', icon: <FileBox className="h-5 w-5" />, action: handleProductsDashboard },
     { text: 'Calificaciones', icon: <ListStart className="h-5 w-5" />, action: handleCalificacionesDashboard },
     { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardAdmin },
-    { text: 'Facturas', icon: <FileBox className="h-5 w-5" />, action: handleFacturasDashboard },
+    { text: 'Facturas', icon: <ReceiptText className="h-5 w-5" />, action: handleFacturasNavigate  },
     { text: 'Pedidos', icon: <PackageIcon className="h-5 w-5" />, action: handlePedidoDashboardAdmin }
   ]
 

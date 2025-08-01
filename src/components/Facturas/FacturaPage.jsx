@@ -25,9 +25,11 @@ const FacturasPage = () => {
     useEffect(() => {
         try {
             const userData = JSON.parse(localStorage.getItem('user'));
-            const userRole = userData?.user?.role;
+            console.log('User Data:', userData);
+            const userRole = userData?.role;
 
-            if (userRole === 'USER') {
+            console.log('User Role:', userRole);
+            if (userRole === 'CLIENTE') {
             handleGetFacturaByUser();
         } else {
             handleGetFacturas();

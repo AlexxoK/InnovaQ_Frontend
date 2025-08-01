@@ -31,8 +31,9 @@ export const useFacturas = ()=>{
         setIsLoading(true);
         try {
             const response = await getFacturaPorUser();
-            if(response?.data?.facturas){
-                setFacturas(response.data.facturas);
+            console.log(response);
+            if(response?.data){
+                setFacturas(response.data);
             }else{
                 throw new Error('Algo salio mal, error al cargar facturas');
             }
