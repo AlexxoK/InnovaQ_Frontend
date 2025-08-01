@@ -9,6 +9,8 @@ import ProductsAdmin from "../../components/Products/ProductsAdmin.jsx";
 import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
 import CategoriaAdmin from "../../components/Categorias/CategoriaAdmin.jsx";
 import CategoriaCliente from "../../components/Categorias/CategoriaCliente.jsx";
+import PedidosForm from "../../components/Pedidos/PedidosForm.jsx";
+
 
 const AppRoutes = () => {
     const routes = useRoutes([
@@ -62,6 +64,13 @@ const AppRoutes = () => {
             path: "/CategoriaCliente", element: (
                 <PrivateRoutes roles={['CLIENTE']}>
                     <CategoriaCliente />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/PedidoCliente", element: (
+                <PrivateRoutes roles={['CLIENTE']}>
+                    <PedidosForm />
                 </PrivateRoutes>
             )
         }

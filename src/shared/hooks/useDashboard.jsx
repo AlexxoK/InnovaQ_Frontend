@@ -91,3 +91,18 @@ export const CategoriaClienteNavigate = () => {
     }
     return { categoriaDashboardCliente, handleCategoriaDashboardCliente };
 }
+
+export const PedidoClienteNavigate = () => {
+    const [PedidoDashboardCliente, setPedidoDashboardCliente] = useState([])
+    const navigate = useNavigate();
+
+    const handlePedidoDashboardCliente = async () => {
+        try {
+            console.log("Pedidos");
+            navigate("/PedidoCliente", { state: { message: "Welcome to Pedidos Cliente" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { PedidoDashboardCliente, handlePedidoDashboardCliente };
+}

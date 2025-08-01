@@ -103,3 +103,19 @@ export const getCalificacionPromedio = async () => {
 export const getPedidos = async () => {
     return await apiClient.get('pedidos/')
 }
+
+export const savePedido = async (data) => {
+    return await apiClient.post('pedidos/', data)
+}
+
+export const getPedidoById = async (id) => {
+    return await apiClient.get(`pedidos/${id}`);
+};
+
+export const updatePedido = async (id, data) => {
+    return await apiClient.put(`pedidos/${id}`, data);
+};
+
+export const deletePedido = async (id) => {
+    return await apiClient.delete(`pedidos/${id}`);
+};
