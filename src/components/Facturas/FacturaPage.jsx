@@ -1,7 +1,7 @@
 import Navbar from '../Layout/Navbar.jsx';
 import { useEffect, useState } from 'react';
 import { useFacturas } from '../../shared/hooks/useFacturas';
-// import './factura.css'
+import './factura.css'
 import { 
   UserIcon,
   EnvelopeIcon,
@@ -25,10 +25,8 @@ const FacturasPage = () => {
     useEffect(() => {
         try {
             const userData = JSON.parse(localStorage.getItem('user'));
-            console.log('User Data:', userData);
             const userRole = userData?.role;
 
-            console.log('User Role:', userRole);
             if (userRole === 'CLIENTE') {
             handleGetFacturaByUser();
         } else {
@@ -84,11 +82,11 @@ const FacturasPage = () => {
                       <div>
                         <h5 className="d-flex align-items-center">
                           <UserIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
-                          {fac.user?.name} {fac.user?.surname}
+                          {fac.user?.nombre} {fac.user?.apellido}
                         </h5>
                         <div className="d-flex align-items-center mt-2">
                           <EnvelopeIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
-                          <span>{fac.user?.email}</span>
+                          <span>{fac.user?.correo}</span>
                         </div>
                         <div className="d-flex align-items-center mt-2">
                           <CurrencyDollarIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
@@ -97,7 +95,12 @@ const FacturasPage = () => {
                         <div className="d-flex align-items-center mt-2">
                           <CalendarDaysIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
                           <span className="factura-date">
-                            {new Date(fac.createdAt).toLocaleString()}
+                            {fac.fechaEmitida ? new Date(fac.fechaEmitida).toLocaleDateString('es-GT', {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit',
+                              }) : 'Fecha no disponible'}
+
                           </span>
                         </div>
                       </div>
@@ -115,35 +118,15 @@ const FacturasPage = () => {
 
                         <div className="d-flex align-items-center">
                           <BuildingStorefrontIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
-                          <strong>Reservación:</strong> 
-                          <span className="ms-2">
-                            {fac.reservacion?.nombreHotel?.name || 'Sin hotel'}
-                          </span>
+                            <ul className="factura-list">
+                          {fac.productos?.map((pro, i) => (
+                            <li key={i}>
+                              {pro.producto.nombre} * {pro.cantidad} - Q{pro.producto.precio}
+                            </li>
+                          ))}
+                        </ul>
                         </div>
 
-                        <h6 className="factura-section-title mt-4">
-                          <HomeIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
-                          Habitaciones
-                        </h6>
-                        <ul className="factura-list">
-                          {fac.reservacion?.habitaciones?.map((hab, i) => (
-                            <li key={i}>
-                              {hab.type} - Q{hab.price}
-                            </li>
-                          ))}
-                        </ul>
-
-                        <h6 className="factura-section-title mt-4">
-                          <TicketIcon className="factura-icon" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
-                          Eventos
-                        </h6>
-                        <ul className="factura-list">
-                          {fac.reservacion?.eventos?.map((ev, i) => (
-                            <li key={i}>
-                              {ev.tipoSala || 'Evento sin tipo'}
-                            </li>
-                          ))}
-                        </ul>
                       </div>
                     )}
                   </div>

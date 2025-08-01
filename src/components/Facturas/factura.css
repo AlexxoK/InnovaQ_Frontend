@@ -1,0 +1,170 @@
+/* Estilos generales */
+.facturas-container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  min-height: 100vh;
+  margin-top: auto;
+}
+
+.facturas-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: none;
+}
+
+.facturas-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.factura-item {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.factura-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(41, 128, 185, 0.15);
+  border-left: 4px solid #3498db;
+}
+
+.factura-header {
+  cursor: pointer;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.factura-content {
+  padding: 15px 20px;
+}
+
+.factura-details {
+  background: #f9fbfd;
+  border-top: 1px solid #eef2f7;
+  padding: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.factura-icon {
+  margin-right: 10px;
+  color: #3498db;
+  vertical-align: middle;
+}
+
+.factura-arrow {
+  transition: transform 0.3s ease;
+  color: #7f8c8d;
+}
+
+.factura-open .factura-arrow {
+  transform: rotate(180deg);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Elementos específicos */
+.factura-total {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.factura-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.factura-section-title {
+  color: #3498db;
+  border-bottom: 1px dashed #e0e7ed;
+  padding-bottom: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.factura-list {
+  padding-left: 20px;
+}
+
+.factura-list li {
+  margin-bottom: 8px;
+  padding-left: 5px;
+}
+
+.factura-list li::marker {
+  color: #3498db;
+}
+
+/* Spinner */
+.spinner-container {
+  animation: pulse 1.5s infinite;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #95a5a6;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  animation: pulse 2s infinite;
+}
+
+/* Encabezado */
+.facturas-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.facturas-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
+}
