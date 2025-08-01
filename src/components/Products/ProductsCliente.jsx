@@ -44,7 +44,7 @@ const ProductsCliente = () => {
 
     return (
         <Layout>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
                 <motion.h1 
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -106,10 +106,7 @@ const ProductsCliente = () => {
                                     </div>
                                 </div>
                                 
-                                <button className="mt-6 w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors duration-300">
-                                    <ShoppingBagIcon className="h-5 w-5 mr-2" />
-                                    Añadir al carrito
-                                </button>
+                                
                             </div>
                         </motion.div>
                     ))}

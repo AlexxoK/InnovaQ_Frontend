@@ -119,3 +119,11 @@ export const updatePedido = async (id, data) => {
 export const deletePedido = async (id) => {
     return await apiClient.delete(`pedidos/${id}`);
 };
+
+export const ingresosDiarios = async () => {
+    return await apiClient.get('pedidos/total-ingresos')
+}
+
+export const pedidosPorUsuario = async () => {
+    return await apiClient.get('pedidos/pedidos-usuario')
+}

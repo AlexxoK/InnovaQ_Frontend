@@ -70,15 +70,6 @@ const Navbar = ({ toggleSidebar }) => {
 
         {/* Right section */}
         <div className="flex items-center space-x-3">
-          <button className="p-2 relative rounded-full hover:bg-gray-700/50 transition-all duration-200 group">
-            <Bell className="h-5 w-5 text-gray-300 group-hover:text-blue-300" />
-            <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500 ring-2 ring-gray-900"></span>
-          </button>
-          
-          <button className="p-2 rounded-full hover:bg-gray-700/50 transition-all duration-200 group">
-            <HelpCircle className="h-5 w-5 text-gray-300 group-hover:text-blue-300" />
-          </button>
-          
           <div className="flex items-center space-x-2 group cursor-pointer">
             <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-medium">
               {user?.name?.charAt(0)?.toUpperCase() || 'U'}
