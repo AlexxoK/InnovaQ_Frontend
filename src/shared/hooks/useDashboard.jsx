@@ -106,3 +106,33 @@ export const CategoriaClienteNavigate = () => {
     }
     return { categoriaDashboardCliente, handleCategoriaDashboardCliente };
 }
+
+export const PedidoClienteNavigate = () => {
+    const [PedidoDashboardCliente, setPedidoDashboardCliente] = useState([])
+    const navigate = useNavigate();
+
+    const handlePedidoDashboardCliente = async () => {
+        try {
+            console.log("Pedidos");
+            navigate("/PedidoCliente", { state: { message: "Welcome to Pedidos Cliente" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { PedidoDashboardCliente, handlePedidoDashboardCliente };
+}
+
+export const PedidoAdminNavigate = () => {
+    const [PedidoDashboardAdmin, setPedidoDashboardAdmin] = useState([])
+    const navigate = useNavigate();
+
+    const handlePedidoDashboardAdmin = async () => {
+        try {
+            console.log("Pedidos");
+            navigate("/PedidoAdmin", { state: { message: "Welcome to Pedidos Admin" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { PedidoDashboardAdmin, handlePedidoDashboardAdmin };
+}

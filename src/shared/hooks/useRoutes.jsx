@@ -9,7 +9,14 @@ import ProductsAdmin from "../../components/Products/ProductsAdmin.jsx";
 import ProductsCliente from "../../components/Products/ProductsCliente.jsx";
 import CategoriaAdmin from "../../components/Categorias/CategoriaAdmin.jsx";
 import CategoriaCliente from "../../components/Categorias/CategoriaCliente.jsx";
+<<<<<<< HEAD
 import FacturasPage from "../../components/Facturas/FacturaPage.jsx";
+=======
+import PedidosForm from "../../components/Pedidos/PedidosForm.jsx";
+import AdminPedidos from "../../components/Pedidos/AdminPedidos.jsx";
+
+
+>>>>>>> 2514d004a4971ee500e552657ad258ea9d690948
 
 const AppRoutes = () => {
     const routes = useRoutes([
@@ -65,10 +72,25 @@ const AppRoutes = () => {
                     <CategoriaCliente />
                 </PrivateRoutes>
             )
+<<<<<<< HEAD
         },{
             path: "/Facturas", element: (
                 <PrivateRoutes roles={['ADMIN']}>
                     <CategoriaCliente />
+=======
+        },
+        {
+            path: "/PedidoCliente", element: (
+                <PrivateRoutes roles={['CLIENTE']}>
+                    <PedidosForm />
+                </PrivateRoutes>
+            )
+        },
+        {
+            path: "/PedidoAdmin", element: (
+                <PrivateRoutes roles={['ADMIN']}>
+                    <AdminPedidos />
+>>>>>>> 2514d004a4971ee500e552657ad258ea9d690948
                 </PrivateRoutes>
             )
         }

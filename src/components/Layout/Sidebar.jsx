@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FileBox, ChevronLeft, Box, Star, ListStart, Layers
+  FileBox, ChevronLeft, Box, Star, ListStart, Layers, PackageIcon
 } from 'lucide-react';
 import './sidebar.css'
 
@@ -12,6 +12,8 @@ import { CalificacionesAdminNavigate } from "../../shared/hooks/useDashboard";
 import { CategoriaAdminNavigate } from "../../shared/hooks/useDashboard";
 import { CategoriaClienteNavigate } from "../../shared/hooks/useDashboard";
 import { FacturasNavigate } from "../../shared/hooks/useDashboard";
+import { PedidoClienteNavigate } from "../../shared/hooks/useDashboard";
+import { PedidoAdminNavigate } from "../../shared/hooks/useDashboard";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const navigate = useNavigate()
@@ -23,11 +25,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { categoriaDashboardAdmin, handleCategoriaDashboardAdmin } = CategoriaAdminNavigate();
   const { categoriaDashboardCliente, handleCategoriaDashboardCliente } = CategoriaClienteNavigate();
   const { facturasDashboard, handleFacturasDashboard } = FacturasNavigate();
+  const { PedidoDashboardCliente, handlePedidoDashboardCliente } = PedidoClienteNavigate();
+  const { PedidoDashboardAdmin, handlePedidoDashboardAdmin } = PedidoAdminNavigate();
 
   const clientSections = [
     { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate },
     { text: 'Califica Nuestra App', icon: <Star className="h-5 w-5" />, action: handleCalificacionesNavigate },
-    { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardCliente }
+    { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardCliente },
+    { text: 'Pedidos', icon: <PackageIcon className="h-5 w-5" />, action: handlePedidoDashboardCliente }
   ];
 
 
@@ -35,7 +40,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { text: 'Productos', icon: <FileBox className="h-5 w-5" />, action: handleProductsDashboard },
     { text: 'Calificaciones', icon: <ListStart className="h-5 w-5" />, action: handleCalificacionesDashboard },
     { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardAdmin },
-    { text: 'Facturas', icon: <FileBox className="h-5 w-5" />, action: handleFacturasDashboard }
+    { text: 'Facturas', icon: <FileBox className="h-5 w-5" />, action: handleFacturasDashboard },
+    { text: 'Pedidos', icon: <PackageIcon className="h-5 w-5" />, action: handlePedidoDashboardAdmin }
   ]
 
   const sections = user?.role === 'ADMIN' ? adminSections : clientSections;

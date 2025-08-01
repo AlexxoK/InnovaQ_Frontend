@@ -123,3 +123,26 @@ export const getFacturaPorUser = async () => {
 export const getFacturaPorId = async (id) => {
     return await apiClient.get(`facturas/${id}`)
 }
+export const savePedido = async (data) => {
+    return await apiClient.post('pedidos/', data)
+}
+
+export const getPedidoById = async (id) => {
+    return await apiClient.get(`pedidos/${id}`);
+};
+
+export const updatePedido = async (id, data) => {
+    return await apiClient.put(`pedidos/${id}`, data);
+};
+
+export const deletePedido = async (id) => {
+    return await apiClient.delete(`pedidos/${id}`);
+};
+
+export const ingresosDiarios = async () => {
+    return await apiClient.get('pedidos/total-ingresos')
+}
+
+export const pedidosPorUsuario = async () => {
+    return await apiClient.get('pedidos/pedidos-usuario')
+}

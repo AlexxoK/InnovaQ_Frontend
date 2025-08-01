@@ -82,7 +82,6 @@ const ProductsAdmin = () => {
             data.append("precio", formData.precio);
             data.append("stock", formData.stock);
 
-            // Solo uno de estos dos debe ir
             if (formData.imagen) {
                 data.append("imagen", formData.imagen);
             } else if (formData.imagenUrl) {
@@ -316,7 +315,6 @@ const ProductsAdmin = () => {
                     </form>
                 </div>
 
-                {/* Products List Section */}
                 <div className={`bg-gradient-to-br from-white to-indigo-50 rounded-xl shadow-lg p-6 transition-all duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
                     <h4 className="text-xl font-bold text-indigo-800 mb-6 flex items-center">
                         <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">

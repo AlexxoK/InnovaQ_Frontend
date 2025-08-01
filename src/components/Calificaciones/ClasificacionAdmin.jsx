@@ -28,7 +28,6 @@ const CalificacionAdmin = () => {
         return new Date(dateString).toLocaleDateString('es-ES', options);
     };
 
-    // Animaciones
     const container = {
         hidden: { opacity: 0 },
         show: {

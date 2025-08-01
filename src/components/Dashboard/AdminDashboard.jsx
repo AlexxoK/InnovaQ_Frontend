@@ -16,7 +16,7 @@ import { useAdminDashbordHook } from "../../shared/hooks/useAdminDashboard";
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { productosMasVendidosList, handleListMasVendidos, handleListUsuario, listUser, promedio, handlePromedio, numeroClientesAll, handleNumeroClientes,
-        pedidosAdmin, handlePedidosAdmin
+        pedidosAdmin, handlePedidosAdmin, ingresosDiariosList, handleIngresosDiarios
     } = useAdminDashbordHook();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -31,16 +31,16 @@ const AdminDashboard = () => {
             await handlePromedio();
             await handleNumeroClientes();
             await handlePedidosAdmin();
+            await handleIngresosDiarios();
             setIsLoading(false)
         };
         fetchData();
     }, [])
 
-    // Datos de ejemplo
     const stats = [
         { title: "Pedidos Realizados", value: `${pedidosAdmin.length}`, icon: <Car className="h-6 w-6" />, trend: "↑ 12%", color: "bg-blue-100 text-blue-600" },
         { title: "Clientes nuevos", value: `${numeroClientesAll}`, icon: <Users className="h-6 w-6" />, trend: "↑ 5%", color: "bg-green-100 text-green-600" },
-        { title: "Ingresos diarios", value: "$1,245", icon: <DollarSign className="h-6 w-6" />, trend: "↑ 18%", color: "bg-purple-100 text-purple-600" },
+        { title: "Ingresos diarios", value: `${ingresosDiariosList}`, icon: <DollarSign className="h-6 w-6" />, trend: "↑ 18%", color: "bg-purple-100 text-purple-600" },
         { title: "Calificación", value: `${promedio}/5`, icon: <Star className="h-6 w-6" />, trend: "", color: "bg-yellow-100 text-yellow-600" }
     ];
 
@@ -59,18 +59,10 @@ const AdminDashboard = () => {
                             <p className="text-gray-600">Sigan haciendo su mayor esfuerzo!</p>
                         </div>
                         <div className="flex gap-3 mt-4 md:mt-0">
-                            <button className="px-4 py-2 bg-white border border-gray-200 hover:border-gray-300 text-gray-700 rounded-lg transition-all flex items-center gap-2">
-                                <FileText className="h-5 w-5" />
-                                Reporte
-                            </button>
-                            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all flex items-center gap-2">
-                                <Settings className="h-5 w-5" />
-                                Configuración
-                            </button>
+                            
                         </div>
                     </div>
 
-                    {/* Stats Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         {stats.map((stat, index) => (
                             <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
@@ -88,20 +80,15 @@ const AdminDashboard = () => {
                         ))}
                     </div>
 
-                    {/* Three Columns Layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {/* Left Column */}
                         <div className="lg:col-span-2 space-y-6">
-                            {/* Recent Orders */}
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
                                         <Activity className="h-5 w-5 text-blue-600" />
                                         Pedidos Recientes
                                     </h2>
-                                    <button className="text-sm text-blue-600 hover:text-blue-800 transition-colors">
-                                        Ver todas
-                                    </button>
+                                    
                                 </div>
 
                                 <div className="overflow-x-auto">
@@ -183,22 +170,9 @@ const AdminDashboard = () => {
                                     </table>
                                 </div>
                             </div>
-
-                            {/* Statistics Chart */}
-                            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                                <h2 className="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2">
-                                    <PieChart className="h-5 w-5 text-blue-600" />
-                                    Estadísticas semanales
-                                </h2>
-                                <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                                    <p className="text-gray-400">Gráfico de ingresos y servicios</p>
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Right Column */}
                         <div className="space-y-6">
-                            {/* Employees */}
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                                     <Users className="h-5 w-5 text-blue-600" />
@@ -223,12 +197,9 @@ const AdminDashboard = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <button className="w-full mt-4 py-2 text-sm text-blue-600 hover:text-blue-800 transition-colors">
-                                    Ver todo el personal
-                                </button>
+                                
                             </div>
 
-                            {/* Alerts */}
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                                     <AlertCircle className="h-5 w-5 text-blue-600" />
@@ -249,9 +220,6 @@ const AdminDashboard = () => {
                                     </div>
                                 ))}
                             </div>
-
-                            {/* Quick Actions */}
-
                         </div>
                     </div>
                 </div>
