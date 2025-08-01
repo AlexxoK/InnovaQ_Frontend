@@ -106,3 +106,18 @@ export const PedidoClienteNavigate = () => {
     }
     return { PedidoDashboardCliente, handlePedidoDashboardCliente };
 }
+
+export const PedidoAdminNavigate = () => {
+    const [PedidoDashboardAdmin, setPedidoDashboardAdmin] = useState([])
+    const navigate = useNavigate();
+
+    const handlePedidoDashboardAdmin = async () => {
+        try {
+            console.log("Pedidos");
+            navigate("/PedidoAdmin", { state: { message: "Welcome to Pedidos Admin" } })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { PedidoDashboardAdmin, handlePedidoDashboardAdmin };
+}
