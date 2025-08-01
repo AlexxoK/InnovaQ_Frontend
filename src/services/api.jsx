@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useLogout } from '../shared/hooks/useLogout'
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3000/InnovaQ/v1',
+    baseURL: 'https://innovaqbackend-production.up.railway.app/InnovaQ/v1',
     timeout: 10000,
     
 })
