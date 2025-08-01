@@ -77,7 +77,7 @@ const Register = () => {
                                     required
                                     placeholder={field === "confirmPassword" ? "Confirmar Contraseña" : field.charAt(0).toUpperCase() + field.slice(1)}
                                     className="register-input"
-                                    maxLength={field === "phone" ? 8 : 25}
+                                    maxLength={field === "phone" ? 8 : 50}
                                     minLength={field === "phone" ? 8 : undefined}
                                 />
                                 {(field === "password" || field === "confirmPassword") && (
