@@ -32,9 +32,12 @@ const usePedidos = () => {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
             const decodedToken = JSON.parse(jsonPayload);
-            return decodedToken.uid || decodedToken.id || decodedToken._id;
+            const userId = decodedToken.uid || decodedToken.id || decodedToken._id;
+            if (!userId) {
+                return null;
+            }
+            return userId;
         } catch (err) {
-            console.error("Error al decodificar el token:", err);
             return null;
         }
     };
@@ -60,47 +63,61 @@ const usePedidos = () => {
         setTotal(newTotal);
     }, [productos, listaProducts]);
 
-    // Lógica corregida para asegurar que los pedidos se carguen correctamente
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
+            setUserLoading(true);
+
+            let id = null;
             try {
-                // Obtener el usuario del almacenamiento local
                 const userString = localStorage.getItem('user');
-                let id = null; // Variable local para el ID de usuario
                 if (userString) {
                     const user = JSON.parse(userString);
                     id = getUserIdFromToken(user.token);
-                    // Actualizar el estado, pero usamos la variable local 'id' para esta ejecución
                     setCurrentUserId(id);
                 } else {
-                    // Si no hay usuario, limpiar el estado del ID
-                    setCurrentUserId(null);
                 }
-                
-                const productsResponse = await listProductos();
-                setListaProducts(productsResponse.data.productos);
-
-                const pedidosResponse = await getPedidos();
-                const allPedidos = pedidosResponse.data.pedidos;
-
-                // Usar la variable local 'id' para filtrar
-                const filtered = id ? allPedidos.filter(pedido => {
-                    const pedidoUserId = typeof pedido.user === 'object' ? pedido.user._id : pedido.user;
-                    return pedidoUserId === id;
-                }) : [];
-                
-                setPedidosList(filtered);
-
-            } catch (err) {
-                showErrorAlert(err);
+            } catch (error) {
             } finally {
-                setLoading(false);
                 setUserLoading(false);
+            }
+
+            if (id) {
+                try {
+                    const productsResponse = await listProductos();
+                    setListaProducts(productsResponse.data.productos);
+
+                    const pedidosResponse = await getPedidos();
+                    const allPedidos = pedidosResponse.data.pedidos;
+
+                    const filtered = allPedidos.filter(pedido => {
+                        let pedidoUserId = null;
+                        if (pedido.user) {
+                            if (typeof pedido.user === 'object') {
+                                pedidoUserId = pedido.user.uid || pedido.user._id;
+                            }
+                            else if (typeof pedido.user === 'string') {
+                                pedidoUserId = pedido.user;
+                            }
+                        }
+                        
+                        return pedidoUserId === id;
+                    });
+                    setPedidosList(filtered);
+
+                } catch (err) {
+                    showErrorAlert(err);
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setListaProducts([]);
+                setPedidosList([]);
+                setLoading(false);
             }
         };
         fetchData();
-    }, [currentUserId]); // El hook se ejecutará cada vez que currentUserId cambie
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -146,13 +163,23 @@ const usePedidos = () => {
                 });
                 return;
             }
+
+            let userIdToSend = currentUserId;
+            if (!userIdToSend) {
+                const userString = localStorage.getItem('user');
+                if (userString) {
+                    const user = JSON.parse(userString);
+                    userIdToSend = getUserIdFromToken(user.token);
+                }
+            }
             
-            if (!currentUserId) {
+            if (!userIdToSend) {
                 Swal.fire({
                     title: 'Error de usuario',
-                    text: 'No se encontraron datos de usuario. Por favor, inicie sesión.',
+                    text: 'No se encontraron datos de usuario. Por favor, inicie sesión nuevamente.',
                     icon: 'error'
                 });
+                setLoading(false);
                 return;
             }
 
@@ -168,9 +195,9 @@ const usePedidos = () => {
                 direccion: formState.direccion,
                 productos: productsToSend,
                 total,
-                user: currentUserId
+                user: userIdToSend
             };
-            
+
             let response;
             const token = JSON.parse(localStorage.getItem('user')).token;
 
@@ -192,7 +219,7 @@ const usePedidos = () => {
                     icon: 'success'
                 });
             }
-            
+
             resetForm();
         } catch (err) {
             showErrorAlert(err);
