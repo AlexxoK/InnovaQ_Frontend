@@ -103,3 +103,23 @@ export const getCalificacionPromedio = async () => {
 export const getPedidos = async () => {
     return await apiClient.get('pedidos/')
 }
+
+export const getPedidosPorId = async (id) => {
+    return await apiClient.get(`pedidos/${id}`)
+}
+
+export const postFactura = async (data) => {
+    return await apiClient.post('facturas/', data)
+}
+
+export const getFacturas = async () => {
+    return await apiClient.get('facturas/')
+}
+
+export const getFacturaPorUser = async () => {
+    return await apiClient.get('facturas/user')
+}
+
+export const getFacturaPorId = async (id) => {
+    return await apiClient.get(`facturas/${id}`)
+}

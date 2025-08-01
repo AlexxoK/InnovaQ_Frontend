@@ -11,6 +11,7 @@ import { CalificacionesNavigate } from "../../shared/hooks/useDashboard";
 import { CalificacionesAdminNavigate } from "../../shared/hooks/useDashboard";
 import { CategoriaAdminNavigate } from "../../shared/hooks/useDashboard";
 import { CategoriaClienteNavigate } from "../../shared/hooks/useDashboard";
+import { FacturasNavigate } from "../../shared/hooks/useDashboard";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const navigate = useNavigate()
@@ -21,6 +22,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { calificacionesDashboard, handleCalificacionesDashboard } = CalificacionesAdminNavigate();
   const { categoriaDashboardAdmin, handleCategoriaDashboardAdmin } = CategoriaAdminNavigate();
   const { categoriaDashboardCliente, handleCategoriaDashboardCliente } = CategoriaClienteNavigate();
+  const { facturasDashboard, handleFacturasDashboard } = FacturasNavigate();
 
   const clientSections = [
     { text: 'Productos', icon: <Box className="h-5 w-5" />, action: handleProductsNavigate },
@@ -32,7 +34,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const adminSections = [
     { text: 'Productos', icon: <FileBox className="h-5 w-5" />, action: handleProductsDashboard },
     { text: 'Calificaciones', icon: <ListStart className="h-5 w-5" />, action: handleCalificacionesDashboard },
-    { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardAdmin }
+    { text: 'Categorias', icon: <Layers className="h-5 w-5" />, action: handleCategoriaDashboardAdmin },
+    { text: 'Facturas', icon: <FileBox className="h-5 w-5" />, action: handleFacturasDashboard }
   ]
 
   const sections = user?.role === 'ADMIN' ? adminSections : clientSections;

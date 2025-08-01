@@ -1,6 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+export const FacturasNavigate = () => {
+    const [facturasNav, setFacturasNav] = useState([]);
+    const navigate = useNavigate();
+    const handleFacturasNavigate = async () => {
+        try {
+            console.log("Facturas");
+            navigate("/Facturas", { state: { message: "Welcome to Facturas" }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    return { facturasNav, handleFacturasNavigate };
+}
+
 export const ProductsAdminNavigate = () => {
     const [productsDashboard, setProductsDashboard] = useState([]);
     const navigate = useNavigate();
